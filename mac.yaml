@@ -19,20 +19,33 @@
       - { name: vim }
       - { name: git }
       - { name: tig }
+      - { name: bash-completion }
+      - { name: jq }
+      - { name: tree }
+      - { name: docker }
+      - { name: docker-machine }
     homebrew_cask_packages:
       - { name: java }
+      - { name: appcleaner }
       - { name: iterm2 }
       - { name: alfred }
+      - { name: xtrafinder }
+      - { name: the-unarchiver }
+      - { name: cheatsheet }
       - { name: google-chrome }
       - { name: google-drive }
       - { name: google-japanese-ime }
+      - { name: picasa }
       - { name: evernote }
+      - { name: skitch }
       - { name: virtualbox }
       - { name: vagrant }
       - { name: android-studio }
       - { name: android-file-transfer }
       - { name: genymotion }
       - { name: gimp }
+      - { name: atom }
+      - { name: insomniax}
 
   tasks:
     - name: enable homebrew tap repositories
