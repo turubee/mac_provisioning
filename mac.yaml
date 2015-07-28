@@ -19,14 +19,20 @@
       - { name: vim }
       - { name: git }
       - { name: tig }
+      - { name: bash-completion }
     homebrew_cask_packages:
       - { name: java }
+      - { name: appcleaner }
       - { name: iterm2 }
       - { name: alfred }
+      - { name: xtrafinder }
+      - { name: the-unarchiver }
+      - { name: cheatsheet }
       - { name: google-chrome }
       - { name: google-drive }
       - { name: google-japanese-ime }
       - { name: evernote }
+      - { name: skitch }
       - { name: virtualbox }
       - { name: vagrant }
       - { name: android-studio }
