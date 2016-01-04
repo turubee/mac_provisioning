@@ -20,6 +20,12 @@
       - { name: git }
       - { name: tig }
       - { name: bash-completion }
+      - { name: nkf }
+      - { name: jq }
+      - { name: tree }
+      - { name: docker }
+      - { name: docker-machine }
+      - { name: node }
     homebrew_cask_packages:
       - { name: java }
       - { name: appcleaner }
@@ -31,6 +37,7 @@
       - { name: google-chrome }
       - { name: google-drive }
       - { name: google-japanese-ime }
+      - { name: picasa }
       - { name: evernote }
       - { name: skitch }
       - { name: virtualbox }
@@ -39,6 +46,10 @@
       - { name: android-file-transfer }
       - { name: genymotion }
       - { name: gimp }
+      - { name: atom }
+      - { name: insomniax }
+    npm_packages:
+      - { name: fluct }
 
   tasks:
     - name: enable homebrew tap repositories
@@ -65,8 +76,9 @@
       shell: brew info {{ item }} > brew_info/{{ item }}
       with_items: brew_result.results | selectattr('changed') | map(attribute='item') | map(attribute='name') | list
 
-    - name: install brew-cask
-      homebrew: name=brew-cask state=latest
+    # If "brew-cask" is installed, it must be removed because it has moved to tap of homebrew
+    - name: uninstall brew-cask
+      homebrew: name=brew-cask state=absent
     - name: install cask packages
       homebrew_cask: name={{ item.name }} state={{ item.state|default('installed') }}
       with_items: homebrew_cask_packages
@@ -77,4 +89,7 @@
       shell: brew cask info {{ item }} > cask_info/{{ item }}
       with_items: cask_result.results | selectattr('changed') | map(attribute='item') | map(attribute='name') | list
 
+    - name: install npm
+      npm: name={{ item.name }} state=present global=True
+      with_items: npm_packages
 
