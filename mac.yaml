@@ -1,19 +1,17 @@
 - hosts: localhost
   connection: local
   gather_facts: no
-  sudo: no
+  become: no
   vars:
     homebrew_taps:
-      - homebrew/binary
-      - homebrew/dupes
-      - caskroom/cask
+      - homebrew/cask
     homebrew_packages:
       - { name: readline }
       - { name: sqlite }
       - { name: gdbm }
       - { name: openssl }
       - { name: openssl, state: linked, install_options: force }
-      - { name: python }
+      - { name: python3 }
       - { name: libyaml }
       - { name: ansible }
       - { name: vim }
@@ -22,11 +20,11 @@
       - { name: bash-completion }
       - { name: nkf }
       - { name: jq }
+      - { name: yq }
       - { name: tree }
-      - { name: docker }
-      - { name: docker-machine }
       - { name: node }
     homebrew_cask_packages:
+      - { name: clipy }
       - { name: java }
       - { name: appcleaner }
       - { name: iterm2 }
@@ -34,10 +32,9 @@
       - { name: xtrafinder }
       - { name: the-unarchiver }
       - { name: cheatsheet }
-      - { name: google-chrome }
-      - { name: google-drive }
+      - { name: firefox }
+      - { name: google-backup-and-sync }
       - { name: google-japanese-ime }
-      - { name: picasa }
       - { name: evernote }
       - { name: skitch }
       - { name: virtualbox }
@@ -48,13 +45,19 @@
       - { name: gimp }
       - { name: atom }
       - { name: insomniax }
+      - { name: slack }
+      - { name: docker }
+      - { name: kitematic }
     npm_packages:
       - { name: fluct }
+    pip_packages:
+      - { name: awscli }
+      - { name: pipenv }
 
   tasks:
     - name: enable homebrew tap repositories
       homebrew_tap: tap={{ item }} state=present
-      with_items: homebrew_taps
+      with_items: "{{ homebrew_taps }}"
 
     - name: update homebrew
       homebrew: update_homebrew=yes
@@ -68,28 +71,33 @@
           if item.install_options is not string
           else item.install_options
         }}
-      with_items: homebrew_packages
+      with_items: "{{ homebrew_packages }}"
       register: brew_result
     - name: create directory of brew info
       file: path=brew_info state=directory
     - name: save brew info
       shell: brew info {{ item }} > brew_info/{{ item }}
-      with_items: brew_result.results | selectattr('changed') | map(attribute='item') | map(attribute='name') | list
+      with_items: "{{ brew_result.results | selectattr('changed') | map(attribute='item') | map(attribute='name') | list }}"
 
     # If "brew-cask" is installed, it must be removed because it has moved to tap of homebrew
     - name: uninstall brew-cask
       homebrew: name=brew-cask state=absent
     - name: install cask packages
+      environment:
+        HOMEBREW_CASK_OPTS: --appdir=/Applications
       homebrew_cask: name={{ item.name }} state={{ item.state|default('installed') }}
-      with_items: homebrew_cask_packages
+      with_items: "{{ homebrew_cask_packages }}"
       register: cask_result
     - name: create directory of brew-cask info
       file: path=cask_info state=directory
     - name: save brew-cask info
       shell: brew cask info {{ item }} > cask_info/{{ item }}
-      with_items: cask_result.results | selectattr('changed') | map(attribute='item') | map(attribute='name') | list
+      with_items: "{{ cask_result.results | selectattr('changed') | map(attribute='item') | map(attribute='name') | list }}"
 
-    - name: install npm
+    - name: install npm packages
       npm: name={{ item.name }} state=present global=True
-      with_items: npm_packages
+      with_items: "{{ npm_packages }}"
 
+    - name: install pip packages
+      pip: name={{ item.name }} state=present
+      with_items: "{{ pip_packages }}"
