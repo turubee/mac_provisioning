@@ -14,7 +14,7 @@
       - { name: python3 }
       - { name: libyaml }
       - { name: ansible }
-      - { name: vim }
+      - { name: nvim }
       - { name: git }
       - { name: tig }
       - { name: bash-completion }
