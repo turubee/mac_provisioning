@@ -34,6 +34,7 @@
       - { name: cheatsheet }
       - { name: firefox }
       - { name: google-backup-and-sync }
+      - { name: google-drive-file-stream }
       - { name: google-japanese-ime }
       - { name: evernote }
       - { name: skitch }
