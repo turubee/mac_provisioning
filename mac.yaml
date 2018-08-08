@@ -23,6 +23,7 @@
       - { name: yq }
       - { name: tree }
       - { name: node }
+      - { name: tfenv }
     homebrew_cask_packages:
       - { name: clipy }
       - { name: java }
@@ -53,7 +54,11 @@
       - { name: fluct }
     pip_packages:
       - { name: awscli }
+      - { name: awslogs }
       - { name: pipenv }
+      - { name: autopep8 }
+      - { name: flake8 }
+      - { name: pytest-jsonlint }
 
   tasks:
     - name: enable homebrew tap repositories
