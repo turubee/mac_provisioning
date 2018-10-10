@@ -24,6 +24,7 @@
       - { name: tree }
       - { name: node }
       - { name: tfenv }
+      - { name: goenv }
     homebrew_cask_packages:
       - { name: clipy }
       - { name: java }
@@ -50,6 +51,7 @@
       - { name: slack }
       - { name: docker }
       - { name: kitematic }
+      - { name: clipy }
     npm_packages:
       - { name: fluct }
     pip_packages:
