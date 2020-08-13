@@ -10,11 +10,12 @@ homebrew_packages:
   ## provisioning
   - { name: ansible }
   ## commands
-  - { name: bash-completion }
   - { name: nkf }
   - { name: jq }
   - { name: yq }
   - { name: tree }
+  - { name: coreutils }
+  - { name: peco }
   ## editor
   - { name: nvim }
   ## git
