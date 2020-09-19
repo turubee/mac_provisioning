@@ -3,48 +3,21 @@
   connection: local
   gather_facts: no
   become: no
-  vars_files:
-    - vars.yaml
+  vars:
+    pip_packages:
+      - { name: awscli }
+      - { name: awslogs }
+      - { name: pipenv }
+      - { name: autopep8 }
+      - { name: flake8 }
+      - { name: pytest-jsonlint }
+    vscode_extension_list:
+      - { name: vscodevim.vim }
+      - { name: marp-team.marp-vscode }
+      - { name: yzane.markdown-pdf }
+      - { name: yzhang.markdown-all-in-one }
+      - { name: hediet.vscode-drawio }
   tasks:
-    - name: enable homebrew tap repositories
-      homebrew_tap: tap={{ item }} state=present
-      with_items: "{{ homebrew_taps }}"
-
-    - name: update homebrew
-      homebrew: update_homebrew=yes
-
-    - name: install homebrew packages
-      homebrew: >
-        name={{ item.name }}
-        state={{ item.state | default('latest') }}
-        install_options={{
-          item.install_options | default() | join(',')
-          if item.install_options is not string
-          else item.install_options
-        }}
-      with_items: "{{ homebrew_packages }}"
-      register: brew_result
-    - name: create directory of brew info
-      file: path=brew_info state=directory
-    - name: save brew info
-      shell: brew info {{ item }} > brew_info/{{ item }}
-      with_items: "{{ brew_result.results | selectattr('changed') | map(attribute='item') | map(attribute='name') | list }}"
-
-    # If "brew-cask" is installed, it must be removed because it has moved to tap of homebrew
-    - name: uninstall brew-cask
-      homebrew: name=brew-cask state=absent
-    - name: install cask packages
-      environment:
-        HOMEBREW_CASK_OPTS: --appdir=/Applications
-      homebrew_cask: name={{ item.name }} state={{ item.state|default('installed') }}
-      with_items: "{{ homebrew_cask_packages }}"
-      register: cask_result
-    - name: create directory of brew-cask info
-      file: path=cask_info state=directory
-    - name: save brew-cask info
-      shell: brew cask info {{ item }} > cask_info/{{ item }}
-      with_items: "{{ cask_result.results | selectattr('changed') | map(attribute='item') | map(attribute='name') | list }}"
-
     - name: install pip packages
       pip: name={{ item.name }} executable=pip3 state=present
       with_items: "{{ pip_packages }}"

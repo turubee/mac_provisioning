@@ -1,4 +1,3 @@
-brew_info
-cask_info
+Brewfile.lock.json
 logs
 mac.retry
