@@ -1,0 +1,67 @@
+---
+homebrew_taps:
+  - homebrew/cask
+homebrew_packages:
+  ## libs
+  - { name: readline }
+  - { name: sqlite }
+  - { name: openssl }
+  - { name: libyaml }
+  ## provisioning
+  - { name: ansible }
+  ## commands
+  - { name: bash-completion }
+  - { name: nkf }
+  - { name: jq }
+  - { name: yq }
+  - { name: tree }
+  ## editor
+  - { name: nvim }
+  ## git
+  - { name: git }
+  - { name: tig }
+  ## environment
+  - { name: pyenv }
+  - { name: tfenv }
+  - { name: goenv }
+homebrew_cask_packages:
+  ## language
+  - { name: java }
+  ## terminal
+  - { name: iterm2 }
+  - { name: hyper }
+  ## browser
+  - { name: google-chrome }
+  - { name: firefox }
+  ## environment
+  - { name: docker }
+  ## note
+  - { name: evernote }
+  ## image
+  - { name: skitch }
+  ## communication
+  - { name: slack }
+  - { name: zoomus }
+  ## editor
+  - { name: visual-studio-code }
+  ## tools
+  - { name: clipy }
+  - { name: appcleaner }
+  # - { name: alfred }
+  # - { name: xtrafinder }
+  - { name: the-unarchiver }
+  - { name: google-backup-and-sync }
+  - { name: google-japanese-ime }
+pip_packages:
+  - { name: awscli }
+  - { name: awslogs }
+  - { name: pipenv }
+  - { name: autopep8 }
+  - { name: flake8 }
+  - { name: pytest-jsonlint }
+vscode_extension_list:
+  - { name: vscodevim.vim }
+  - { name: marp-team.marp-vscode }
+  - { name: yzane.markdown-pdf }
+  - { name: yzhang.markdown-all-in-one }
+  - { name: hediet.vscode-drawio }
