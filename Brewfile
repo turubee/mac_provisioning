@@ -9,6 +9,7 @@ brew "jq"
 brew "neovim"
 brew "nkf"
 brew "nodebrew"
+brew "mas"
 brew "peco"
 brew "pyenv"
 brew "saml2aws"
@@ -35,3 +36,5 @@ cask "slack"
 cask "the-unarchiver"
 cask "visual-studio-code"
 cask "zoom"
+
+mas "Perculia", id: 1462633284
