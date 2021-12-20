@@ -25,3 +25,5 @@ fi
 
 echo "\n### start ansible-playbook"
 ansible-playbook -i "localhost," mac.yaml --diff | tee -a ${LOG_FILE_PATH}
+
+echo "👍 MacOS provisioning is done!"
