@@ -1,6 +1,6 @@
 #!/bin/zsh
 mkdir -p logs
-LOG_FILE_PATH=logs/$0_$(date '+%Y%m%d%H%M%S').log
+LOG_FILE_PATH=logs/$(date '+%Y%m%d%H%M%S').log
 
 echo "### start brew bundle"
 brew bundle -v | tee -a ${LOG_FILE_PATH}
