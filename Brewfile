@@ -1,10 +1,12 @@
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
+tap "aws/tap"
 
 brew "ansible"
 brew "coreutils"
 brew "git"
+brew "groff"
 brew "jq"
 brew "neovim"
 brew "nkf"
@@ -17,6 +19,7 @@ brew "tfenv"
 brew "tig"
 brew "tree"
 brew "yq"
+brew "aws-nuke"
 
 cask_args appdir: "~/Applications"
 
