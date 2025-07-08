@@ -3,7 +3,8 @@ mkdir -p logs
 LOG_FILE_PATH=logs/$(date '+%Y%m%d%H%M%S').log
 
 echo "### start brew bundle"
-brew bundle -v | tee -a ${LOG_FILE_PATH}
+brew bundle --file=Brewfile-global -v | tee -a ${LOG_FILE_PATH}
+brew bundle --file=Brewfile-user -v | tee -a ${LOG_FILE_PATH}
 
 echo "\n### start brew bundle cleanup"
 OUTPUT=$(brew bundle cleanup)
